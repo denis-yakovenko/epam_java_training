@@ -1,7 +1,7 @@
 package task2;
 
 import task2.flower.Flower;
-import task2.flower.Freshness;
+import task2.util.BouquetUtil;
 
 import java.util.ArrayList;
 
@@ -17,30 +17,11 @@ public class Bouquet {
         flowers.add(flower);
     }
 
-    public Integer getCost() {
-        Integer cost = 0;
-        for (Flower flower : flowers
-                ) {
-            cost += flower.getPrice();
-        }
-        return cost;
-    }
-
-    public float getFreshness() {
-        Integer freshFlowersInBouquet = 0;
-        for (Flower flower : flowers
-                ) {
-            if (flower.getFreshness().equals(Freshness.FRESH))
-                freshFlowersInBouquet++;
-        }
-        return (float) freshFlowersInBouquet / flowers.size();
-    }
-
     @Override
     public String toString() {
         return "Bouquet{" +
-                "cost=" + getCost() +
-                ", freshness=" + getFreshness() +
+                "cost=" + BouquetUtil.getCost(this) +
+                ", freshness=" + BouquetUtil.getFreshness(this) +
                 ", flowers" + flowers +
                 '}';
     }

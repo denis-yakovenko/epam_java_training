@@ -1,6 +1,7 @@
 package task2;
 
 import task2.flower.*;
+import task2.util.BouquetUtil;
 
 public class main {
     public static void main(String[] args) {
@@ -28,16 +29,13 @@ public class main {
         // flowers have an interface "Smelling"
         for (Bouquet bouquet1 : flowerShop.getBouquets()
                 ) {
-            for (Flower flower : bouquet1.getFlowers()
-                    ) {
-                flower.smell();
-            }
+            bouquet1.getFlowers().forEach(Smelling::smell);
         }
 
         // determine the cost of each bouquet
         for (Bouquet bouquet1 : flowerShop.getBouquets()
                 ) {
-            System.out.println(String.format("Bouquet cost: %d", bouquet1.getCost()));
+            System.out.println(String.format("Bouquet cost: %d", BouquetUtil.getCost(bouquet1)));
         }
 
         // determine the longest flower in all bouquets
@@ -58,7 +56,7 @@ public class main {
         Bouquet freshestBouquet = null;
         for (Bouquet bouquet1 : flowerShop.getBouquets()
                 ) {
-            if (freshestBouquet == null || bouquet1.getFreshness() > freshestBouquet.getFreshness())
+            if (freshestBouquet == null || BouquetUtil.getFreshness(bouquet1) > BouquetUtil.getFreshness(freshestBouquet))
                 freshestBouquet = bouquet1;
         }
         if (freshestBouquet != null)
