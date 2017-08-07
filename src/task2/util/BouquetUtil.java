@@ -4,9 +4,6 @@ import task2.Bouquet;
 import task2.flower.Flower;
 import task2.flower.Freshness;
 
-/**
- * Created by admin on 04.08.2017.
- */
 public class BouquetUtil {
     public static Integer getCost(Bouquet bouquet) {
         Integer cost = 0;

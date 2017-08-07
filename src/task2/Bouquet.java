@@ -4,12 +4,13 @@ import task2.flower.Flower;
 import task2.util.BouquetUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Bouquet {
 
-    ArrayList<Flower> flowers = new ArrayList<>();
+    List<Flower> flowers = new ArrayList<>();
 
-    public ArrayList<Flower> getFlowers() {
+    public List<Flower> getFlowers() {
         return flowers;
     }
 
