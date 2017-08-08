@@ -15,7 +15,7 @@ public class Main {
         //bouquet.addFlower(new Flower(Kind.ROSE, Color.WHITE, 29, 55));
         flowerShop.bouquets.add(bouquet);
 
-        // flowers have an interface "Smelling"
+        // aaaaaaaaaaaaaa flowers have an interface "Smelling"
         for (Bouquet bouquet1 : flowerShop.bouquets
                 ) {
             //bouquet1.getFlowers().forEach(Smellable::smell);
