@@ -1,26 +1,26 @@
 package task4;
 
-import task4.flower.Flower;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bouquet {
 
-    List<Flower> flowers = new ArrayList<>();
+    private List<Plant> plants = new ArrayList<>();
 
-    public List<Flower> getFlowers() {
-        return flowers;
+    public List<Plant> getPlants() {
+        return plants;
     }
 
-    public void addFlower(Flower flower) {
-        flowers.add(flower);
+    public void addPlant(Plant plant) {
+        plants.add(plant);
     }
 
-    @Override
-    public String toString() {
-        return "Bouquet{" +
-                flowers +
-                '}';
+    public Integer findPlant(Plant plant) {
+        for (int i = 0; i < plants.size(); i++) {
+            if (plants.get(i).equals(plant)) {
+                return i; // returning the index of the plant in the bouquet
+            }
+        }
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package task4.flower;
+package task4;
 
 public enum Color {
     RED,
