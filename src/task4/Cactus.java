@@ -3,8 +3,8 @@ package task4;
 public class Cactus extends Plant implements CanStoreWater {
     private Double storedWater;
 
-    public Cactus(String name, Color color, Integer height, Double storedWater) {
-        super(name, color, height, Freshness.FRESH);
+    public Cactus(String name, Color color, Integer height, Double storedWater, Integer price) {
+        super(name, color, height, Freshness.FRESH, price);
         this.storedWater = storedWater;
     }
 
@@ -33,5 +33,13 @@ public class Cactus extends Plant implements CanStoreWater {
         int result = super.hashCode();
         result = 31 * result + getStoredWater().hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Cactus{" +
+                super.toString()+
+                ", storedWater=" + storedWater +
+                '}';
     }
 }

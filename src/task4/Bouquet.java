@@ -23,4 +23,29 @@ public class Bouquet {
         }
         return null;
     }
+    public Integer getCost() {
+        Integer cost = 0;
+        for (Plant plant : plants
+                ) {
+            cost += plant.getPrice();
+        }
+        return cost;
+    }
+
+    public float getFreshness() {
+        Integer freshFlowersInBouquet = 0;
+        for (Plant plant : plants
+                ) {
+            if (plant.getFreshness().equals(Freshness.FRESH))
+                freshFlowersInBouquet++;
+        }
+        return (float) freshFlowersInBouquet / plants.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Bouquet{" +
+                "plants=" + plants +
+                '}';
+    }
 }
