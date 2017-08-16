@@ -1,6 +1,3 @@
-/**
- * Created by admin on 08.08.2017.
- */
 public class Test1 {
     public static void main(String[] args) {
         Test1 test1 = new Test1();

@@ -1,6 +1,4 @@
-/**
- * Created by admin on 08.08.2017.
- */
+
 public class Test {
     public static void main(String[] args) {
         A a = new A(1);
