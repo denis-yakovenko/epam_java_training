@@ -1,4 +1,5 @@
 package MyHashMap;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,15 +15,14 @@ public class MyMapTest {
         map.put("Lars", 1);
         map.put("Lars", 2);
         map.put("Lars", 1);
-        //assertEquals(map.get("Lars"), 1);
+        assertEquals(map.get("Lars"), 1, 0);
         for (int i = 0; i < 100; i++) {
             map.put(String.valueOf(i), i);
         }
         assertEquals(map.size(), 101);
-        //assertEquals(map.get("51"), 51);
-        for (String e: map.keySet()
-             ) {
-            System.out.println(e);
-        }
+        assertEquals(map.get("51"), 51, 0);
+        map.remove("Lars");
+        assertEquals(map.size(), 100);
+        assertEquals(map.keySet().size(),100);
     }
 }
