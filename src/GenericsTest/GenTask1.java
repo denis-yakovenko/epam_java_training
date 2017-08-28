@@ -19,18 +19,16 @@ public class GenTask1<X> {
         arrInt.add(23);
         swap(arrInt, 0, 1);
         System.out.println(arrInt.toString());
+        System.out.println(find(arrInt, 1, 5));
 
-        Library library = new Library();
+        GenericLibrary<Media> library = new Library<>();
         library.add(new Book());
+        library.add(new Video());
         library.add(new Newspaper());
         System.out.println(library.get(0));
 
-        GenericLibrary<Media> genericLibrary = new GenericLibrary<>();
-        genericLibrary.add(new Book());
-        genericLibrary.add(new Video());
-        System.out.println(genericLibrary.get(0));
-
-        System.out.println(find(arrInt, 1, 5));
+        //GenericLibrary<Integer> lib = new Library<>();
+        //compilation error because the GenericLibrary allows only Media children
     }
 
     void test(X z) {
@@ -46,43 +44,6 @@ public class GenTask1<X> {
         m.set(index2, temp);
     }
 
-    static abstract class Media {
-    }
-
-    static class Book extends Media {
-    }
-
-    static class Video extends Media {
-    }
-
-    static class Newspaper extends Media {
-    }
-
-
-    static class Library {
-        List<Media> mediaList = new ArrayList<>();
-
-        void add(Media media) {
-            mediaList.add(media);
-        }
-
-        Media get(Integer index) {
-            return mediaList.get(index);
-        }
-    }
-
-    static class GenericLibrary<T extends Media> {
-        List<T> mediaList = new ArrayList<>();
-
-        void add(T media) {
-            mediaList.add(media);
-        }
-
-        T get(Integer index) {
-            return mediaList.get(index);
-        }
-    }
-
     static <E extends Comparable<E>> E find(List<E> m, Integer begin, Integer end) {
         E max = m.get(begin);
         for (int i = begin + 1; i < end; i++)
@@ -90,5 +51,30 @@ public class GenTask1<X> {
                 max = m.get(i);
         return max;
     }
-
 }
+
+class Library<T extends Media> implements GenericLibrary<T> {
+    private List<T> mediaList = new ArrayList<>();
+
+    public void add(T media) {
+        mediaList.add(media);
+    }
+
+    public T get(Integer index) {
+        return mediaList.get(index);
+    }
+}
+
+interface GenericLibrary<T extends Media> {
+    void add(T media);
+
+    T get(Integer index);
+}
+
+abstract class Media {}
+
+class Book extends Media {}
+
+class Video extends Media {}
+
+class Newspaper extends Media {}
