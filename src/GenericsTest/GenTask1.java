@@ -1,6 +1,8 @@
 package GenericsTest;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GenTask1<X> {
@@ -19,6 +21,8 @@ public class GenTask1<X> {
         arrInt.add(23);
         swap(arrInt, 0, 1);
         System.out.println(arrInt.toString());
+        Collections.sort(arrInt, Integer::compareTo);
+        System.out.println(arrInt.toString());
         System.out.println(find(arrInt, 1, 5));
 
         GenericLibrary<Media> library = new Library<>();
@@ -29,6 +33,10 @@ public class GenTask1<X> {
 
         //GenericLibrary<Integer> lib = new Library<>();
         //compilation error because the GenericLibrary allows only Media children
+
+        List<ComparatorAndComparable> comparatorAndComparableList = new ArrayList<>();
+        comparatorAndComparableList.add(new ComparatorAndComparable());
+        System.out.println(comparatorAndComparableList.size());
     }
 
     void test(X z) {
@@ -53,6 +61,20 @@ public class GenTask1<X> {
     }
 }
 
+
+class ComparatorAndComparable<T> implements Comparator<T>, Comparable<T> {
+    @Override
+    public int compare(T o1, T o2) {
+        return 0;
+    }
+
+    @Override
+    public int compareTo(T o) {
+        return 0;
+    }
+}
+
+
 class Library<T extends Media> implements GenericLibrary<T> {
     private List<T> mediaList = new ArrayList<>();
 
@@ -71,10 +93,14 @@ interface GenericLibrary<T extends Media> {
     T get(Integer index);
 }
 
-abstract class Media {}
+abstract class Media {
+}
 
-class Book extends Media {}
+class Book extends Media {
+}
 
-class Video extends Media {}
+class Video extends Media {
+}
 
-class Newspaper extends Media {}
+class Newspaper extends Media {
+}
