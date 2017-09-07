@@ -111,21 +111,26 @@ public class JDBCOrderRepoImpl implements IOrderRepo {
             Statement stmt = connection.createStatement();
             String sql = "SELECT id, payment, status FROM `order` ORDER BY id";
             ResultSet rs = stmt.executeQuery(sql);
-            PreparedStatement pStmt;
-            sql = "select d.id,d.name,d.price from order_dishes od join dish d on od.dish_id=d.id where od.order_id = ?";
-            pStmt = connection.prepareStatement(sql);
-            ResultSet rsDetail;
             while (rs.next()) {
                 Order order = new Order();
                 order.setId(rs.getInt("id"));
                 order.setPayment(Payment.fromString(rs.getString("payment")));
                 order.setStatus(Status.valueOf(rs.getString("status")));
-                pStmt.setInt(1, order.getId());
-                rsDetail = pStmt.executeQuery();
-                while (rsDetail.next()) {
-                    order.addItem(new Dish(rsDetail.getInt("id"), rsDetail.getString("name"), rsDetail.getDouble("price")));
-                }
                 orders.put(order.getId(), order);
+            }
+            PreparedStatement pStmt;
+            sql = "select od.order_id, d.id, d.name, d.price from order_dishes od join dish d on od.dish_id=d.id ORDER BY od.order_id";
+            pStmt = connection.prepareStatement(sql);
+            ResultSet rsDetail;
+            rsDetail = pStmt.executeQuery();
+            while (rsDetail.next()) {
+                orders.get(rsDetail.getInt("order_id"))
+                        .addItem(
+                                new Dish(rsDetail.getInt("id"),
+                                        rsDetail.getString("name"),
+                                        rsDetail.getDouble("price")
+                                )
+                        );
             }
         } catch (SQLException e) {
             e.printStackTrace();

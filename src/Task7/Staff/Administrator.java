@@ -1,19 +1,18 @@
 package Task7.Staff;
 
-import Task7.ConsoleHelper;
-import Task7.Order;
-import Task7.Payment;
-import Task7.Repository.IOrderRepo;
-import Task7.Status;
+import Task7.*;
 
 import java.util.Arrays;
 
 import static Task7.ConsoleHelper.writeMessage;
-import static Task7.Restaurant.getOrderRepo;
 
 public class Administrator extends Person{
 
-    private IOrderRepo orderRepo = getOrderRepo();
+    private Restaurant restaurant;
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 
     public Administrator(String name) {
         super(name);
@@ -22,7 +21,7 @@ public class Administrator extends Person{
     public void acceptOrder(Order order)  {
         writeMessage("order accepted: "+order);
         order.setStatus(Status.ACCEPTED);
-        orderRepo.save(order);
+        restaurant.getOrderRepo().save(order);
     }
 
     public void processPay(Order order)  {
@@ -32,6 +31,6 @@ public class Administrator extends Person{
         order.setPayment(payment);
         order.processPay();
         order.setStatus(Status.PAYED);
-        orderRepo.save(order);
+        restaurant.getOrderRepo().save(order);
     }
 }

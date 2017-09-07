@@ -14,8 +14,12 @@ public class Main {
         Connection connection = MySQLConnectionImpl.getConnection();
         restaurant.setDishRepo(JDBCDishRepoImpl.getInstance(connection));
         restaurant.setOrderRepo(JDBCOrderRepoImpl.getInstance(connection));
-        restaurant.setAdministrator(new Administrator("John Doe"));
-        restaurant.setCook(new Cook("Gordon Freeman"));
+        Administrator administrator = new Administrator("John Doe");
+        administrator.setRestaurant(restaurant);
+        restaurant.setAdministrator(administrator);
+        Cook cook = new Cook("Gordon Freeman");
+        cook.setRestaurant(restaurant);
+        restaurant.setCook(cook);
         restaurant.run();
     }
 }

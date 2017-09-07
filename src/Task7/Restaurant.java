@@ -27,6 +27,14 @@ public class Restaurant {
         this.orderRepo = orderRepo;
     }
 
+    public IDishRepo getDishRepo() {
+        return dishRepo;
+    }
+
+    public IOrderRepo getOrderRepo() {
+        return orderRepo;
+    }
+
     public void setAdministrator(Administrator administrator) {
         this.administrator = administrator;
     }
