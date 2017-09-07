@@ -1,11 +1,10 @@
 package Task7;
 
-import Task7.Repository.*;
+import Task7.Repository.IDishRepo;
+import Task7.Repository.IOrderRepo;
 import Task7.Staff.Administrator;
 import Task7.Staff.Cook;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Map;
 
 import static Task7.ConsoleHelper.askOperation;
@@ -14,39 +13,29 @@ import static Task7.Operation.EXIT;
 
 public class Restaurant {
 
-    private IDishRepo dishRepo = getDishRepo();
-    private IOrderRepo orderRepo = getOrderRepo();
+    private IDishRepo dishRepo;
+    private IOrderRepo orderRepo;
     private Map<Integer, Dish> menu;
-    private Administrator administrator = new Administrator("John Doe");
-    private Cook cook = new Cook("Gordon Freeman");
+    private Administrator administrator;
+    private Cook cook;
 
-    public static Connection getConnection() {
-        return MySQLConnectionImpl.getConnection();
+    public void setDishRepo(IDishRepo dishRepo) {
+        this.dishRepo = dishRepo;
     }
 
-    public static void closeConnection() {
-        try {
-            getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void setOrderRepo(IOrderRepo orderRepo) {
+        this.orderRepo = orderRepo;
     }
 
-    public static IDishRepo getDishRepo() {
-        return JDBCDishRepoImpl.getInstance(getConnection());
+    public void setAdministrator(Administrator administrator) {
+        this.administrator = administrator;
     }
 
-    public static IOrderRepo getOrderRepo() {
-        return JDBCOrderRepoImpl.getInstance(getConnection());
+    public void setCook(Cook cook) {
+        this.cook = cook;
     }
 
-    public static void main(String[] args) {
-        Restaurant restaurant = new Restaurant();
-        restaurant.run();
-    }
-
-    private void run() {
-        openDB();
+    public void run() {
         Operation operation;
         do {
             operation = askOperation();
@@ -64,11 +53,6 @@ public class Restaurant {
                     break;
             }
         } while (operation != EXIT);
-        closeDB();
-    }
-
-    private void openDB() {
-        createTestMenuIfNotExists();
     }
 
     private void processOrder() {
@@ -105,21 +89,5 @@ public class Restaurant {
                 ) {
             writeMessage(order.getValue().toString());
         }
-    }
-
-    private void createTestMenuIfNotExists() {
-        if (dishRepo.getAll().size() == 0) {
-            dishRepo.save(new Dish("Steak", 1.2));
-            dishRepo.save(new Dish("Soup", 4.5));
-            dishRepo.save(new Dish("Hamburger", 2.6));
-            dishRepo.save(new Dish("Coffee", 9.4));
-            dishRepo.save(new Dish("Tea", 0.5));
-            Dish dish = dishRepo.save(new Dish("Test", 0.5));
-            dishRepo.delete(dish.getId());
-        }
-    }
-
-    private void closeDB() {
-        closeConnection();
     }
 }

@@ -1,9 +1,22 @@
 
 public class Test {
+
+    int x = 1;
+
+    public class Inner{
+
+        /*static*/ int x = 5;
+
+        public void method(){
+            System.out.println(x);
+        }
+    }
+
     public static void main(String[] args) {
         //test1();
         //test2();
         //test3();
+        new Test().new Inner().method();
         testMethod(() -> System.out.println("do something"));
         testMethod((InterfaceNameWithParam) System.out::println);
         testMethod((s, s1) -> System.out.println(s+s1));
