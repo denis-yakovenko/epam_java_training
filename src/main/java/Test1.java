@@ -1,5 +1,25 @@
 public class Test1 {
     public static void main(String[] args) {
+        for (short i = 32766; i < 32767; i++) {
+            System.out.println(i);
+        }
+
+        int n = -1;
+        while (++n < 5) {
+            for (int i = 0; i < n - 1; i++) {
+                System.out.print('*');
+            }
+            System.out.println('.');
+        }
+
+        n = 1;
+        while (++n < 5) {
+            for (int i = 0; i < n; i++) {
+                System.out.print('*');
+            }
+            System.out.println(',');
+        }
+
         Test1 test1 = new Test1();
         char c = 'c';
         test1.method(c);
